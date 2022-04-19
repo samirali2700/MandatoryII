@@ -1,6 +1,5 @@
 import { writable, readable, derived } from 'svelte/store';
 
-console.log('inside store')
 
 export const user = writable({});
 export const rememberMe = writable(false);

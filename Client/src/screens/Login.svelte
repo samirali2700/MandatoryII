@@ -48,30 +48,32 @@
       .catch((e) => console.log(e));
   }
 
-  function clickme() {
-    toastr.success("Success", "Login successfully", {
-      timeOut: 5000,
-      positionClass: "toast-top-center",
-      closeButton: true,
-    });
-    // toastr.options = {
-    //   closeButton: false,
-    //   debug: false,
-    //   newestOnTop: false,
-    //   progressBar: false,
-    //   positionClass: "toast-top-center",
-    //   preventDuplicates: false,
-    //   onclick: null,
-    //   showDuration: "300",
-    //   hideDuration: "1000",
-    //   timeOut: "5000",
-    //   extendedTimeOut: "1000",
-    //   showEasing: "swing",
-    //   hideEasing: "linear",
-    //   showMethod: "fadeIn",
-    //   hideMethod: "fadeOut",
-    // };
-    // toastr["success"]("Login success", "Success");
+  function resetPass() {
+    fetch("/Auth/forgot", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ email: email }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          toastr.success(result.success, "Success", {
+            timeOut: 2500,
+            positionClass: "toast-top-center",
+            closeButton: true,
+          });
+          document.getElementById("id01").style.display = "none";
+        } else {
+          toastr.error(result.fail, "Error", {
+            timeOut: 2500,
+            positionClass: "toast-top-center",
+            closeButton: true,
+          });
+        }
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
   }
 </script>
 
@@ -104,12 +106,57 @@
         />
         <label for="rememberMe">Remember me?</label>
       </div>
+      <div class="remember-me-container">
+        <div>
+          <p
+            onclick="document.getElementById('id01').style.display='block'"
+            style="color:#0088ff;"
+          >
+            Forgot password?
+          </p>
+          <span>This will only send email, with a none working link</span>
+          <span class="w3-spin">....</span>
+
+          <div id="id01" class="w3-modal ">
+            <div
+              class="w3-modal-content  w3-animate-zoom w3-card-4"
+              style="padding:25px 10px; max-width:650px;"
+            >
+              <div class="w3-container w3-padding-16 w3-center w3-section">
+                <span
+                  onclick="document.getElementById('id01').style.display='none'"
+                  class="w3-button w3-display-topright w3-red">&times;</span
+                >
+                <p>
+                  You will receive an email with instructions on how to reset
+                  your password
+                </p>
+                <input
+                  style="width:100%; "
+                  type="text"
+                  bind:value={email}
+                  class="w3-section"
+                />
+                <p
+                  on:click={resetPass}
+                  class="w3-button w3-blue"
+                  style="width:100%;"
+                >
+                  Reset password
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <button type="submit">Login</button>
     </form>
   </div>
 {/if}
 
 <style>
+  #id01 {
+  }
   .remember-me-container {
     display: flex;
     align-items: center;

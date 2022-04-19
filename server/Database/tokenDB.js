@@ -1,5 +1,9 @@
 import { db } from './tokenDBConnection.js';
 
+/**
+ * Skip for now, this would be to store the refreshtokens
+ */
+
 await deleteDb();
 await createDB();
 

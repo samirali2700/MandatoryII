@@ -21,7 +21,7 @@
 {#if _user !== null}
   <Router primary={false}>
     <header class="w3-card">
-      <div class="nav">
+      <div class="nav w3-bottombar w3-padding-16">
         {#if $userLoggedIn}
           <div class="links w3-bar-item w3-left ">
             <a href="/" class="link" use:link>Home</a>
@@ -64,8 +64,6 @@
 
 <style>
   .nav {
-    border-bottom: 1px solid black;
-    padding: 0 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
