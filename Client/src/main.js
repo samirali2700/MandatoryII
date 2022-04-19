@@ -2,7 +2,7 @@ import App from './App.svelte';
 import { user, rememberMe } from './stores'
 
 
-console.log('inside main')
+
 // since rememberMe cookie, is not a httpOnly cookie,
 //it is accessible with js. 
 const value = getCookie('rememberMe');
@@ -40,7 +40,10 @@ function getCookie(name) {
 
 
 const app = new App({
-	
+	//by giving the app component a _user prop,
+	//the loading of the SSO will be smoother
+	//meaning there will not be multiple visible loading, specially in case of slow network,
+	//the screen will be blank until everything is ready
 	target: document.body,
 	props: {
 		_user: null

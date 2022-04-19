@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:false}));
 
 //setting svelte project as frontend
-app.use(express.static(path.resolve('../Client/public')));
+app.use(express.static(path.resolve('./Client/public')));
 
 //Authentication routes
 import router  from './server/Authentication/AuthenticationRoutes.js';

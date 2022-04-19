@@ -205,9 +205,24 @@ router.post('/Auth/login', async (req,res) => {
 
 router.get('/Auth/forgot', (req,res)=>{
 
-    
-})
+    console.log(req.query.email)
 
+    checkUser({email: req.query.email, password: null})
+.then((result) => { /*Will prop never reach her*/ })
+    .catch((err) => {
+        if(err.message === 'Incorrect password'){
+            console.log('User exists')
+        }
+        else if (err.message === 'Email not found'){
+            console.log('User does not exist')
+        }
+        else {
+            console.log('something different went wront')
+        }
+    })
+    
+   
+})
 
 
 export default router;
