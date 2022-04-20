@@ -9,8 +9,6 @@ import path from 'path';
 import mongoose from 'mongoose';
 
 
-
-
 //instantiating app
 const app = express();
 

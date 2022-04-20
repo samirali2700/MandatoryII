@@ -13,10 +13,12 @@ import  mailService  from '../Mail/mailService.js';
 const router = Router();
 
 
-//defining general cookie options
-//refrehToken will by default expire after 1 day, 
-//which is set in the function generateRefreshToken, 
-//that it is because it will also have an option of modifying expiration to 90 days, if rememberMe is true
+/*
+* defining general cookie options
+* refrehToken will by default expire after 1 day, 
+* which is set in the function generateRefreshToken, 
+* it will also have an option of modifying expiration to 90 days, if rememberMe is true
+*/
 const refreshCookieOptions = {
         httpOnly: true,
         sameSite: 'strict',
@@ -25,32 +27,20 @@ const refreshCookieOptions = {
 
 //accessToken will by default expire after 15 min
 const accessCookieOptions =   {
- 
         httpOnly: true,
         sameSite: 'strict',
         maxAge:  900000     //15min
-   
 }
 
 
-/*
-Auth end point, frontend each time it is refreshed, 
-will fetch to /Auth end point, this will check whether access or refresh token is defined
-if not, then front end will direct to login page 
-becuase this is a special end point that is directly fetched from main.js in frontend, 
-and not a middleware that is run every time a request comes in
-a specific authenticate function is defined to be used not only in /Auth endpoint
-but also before reaching any other endpoints that are not /Auth
-*/
+
 function authenticate(req, res){
 
     /**
-     * This function is only a way to skip login,
-     * and keep a user logged in
-     * the frontend will fetch to the /Auth endpoint on each refresh
-     * this method will return a user object if tokens are available and valid
-     * a function similar to this that only checks and validates the token will be needed
-     * if an endpoint that return sensitive information is requested, in this project there are none
+     *  This function is to authenticate tokens,
+     *  this method will return a user object if tokens are available and valid
+     *  a function similar to this that only checks and validates the token will be needed
+     *  if an endpoint that return sensitive information is requested, in this project there are none
      */
 
 
@@ -60,6 +50,7 @@ function authenticate(req, res){
 
     
     if(accessToken !== undefined){
+
         //verfying token
         verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET)
         .then((user) => {
@@ -89,13 +80,10 @@ function authenticate(req, res){
     else{
         res.status(403).send({message: 'Neither work'});
     }
-
-    //if it request is not meant for /Auth endpoint,
-    //next() method will be called
-    // if(req.url !== '/Auth'){
-    //     next()
-    // } 
 }
+
+
+//  /logout endpoint, will delete the stored token in cookie
 router.delete('/Auth/logout', (req,res) => {
     res.clearCookie('_accessToken');
     res.clearCookie('_refreshToken');
@@ -103,7 +91,16 @@ router.delete('/Auth/logout', (req,res) => {
     res.status(201).send()
 })
 
-///Auth end point
+/*
+*   Auth end point. will keep a user logged in if token are valid
+*   frontend each time it is refreshed, will fetch to /Auth end point, 
+*   this will check whether access or refresh token are defined
+*   if not, then frontend will redirect to login page 
+*   becuase this is a special end point that is directly fetched from main.js in frontend, 
+*   and not a middleware that is run every time a request comes in
+*   a specific authenticate function is defined to be used not only in /Auth endpoint
+*   but also before reaching any other sensitive endpoints that are not /Auth
+*/
 router.get('/Auth', authenticate)
 
 //signup endpoint
@@ -114,12 +111,12 @@ router.post('/Auth/signup', (req,res) => {
     //saveUser() method returns a promise
     saveUser(user)
     .then((result) => { 
-        //if everything is good, cookies and response wil be set her
-        //the result return a user from mongoose, with unique _id
+        //if everything is good, cookies and response wil be set here
+        //the result returns a user from mongoose, with unique _id
         user = result
     
         //generating both access and refresh token, assuming there are none generated already
-        //accessToken will have expiration on
+        //accessToken will have expiration 
         const accessToken = generateAccessToken({id: user._id, name: user.name, email: user.email});
 
         //first parameter will be user info, name and email are not needed and id is more then enough
@@ -128,9 +125,9 @@ router.post('/Auth/signup', (req,res) => {
         //else it should be set as '10d' for 10 days and '90d' for 90 days .. 
         const refreshToken = generateRefreshToken({id: user._id, name: user.name, email: user.email}, null);
     
-        //both token are set in cookie, inside an object, by doing that it is sligthly more encoded
-        //the second parameter is the cookie options, both have token each has it own cookie options for easier modification
-        //both cookie will be httpOnly, and not accessible in other ways, also sameSite is strict, so only main domain has access 
+        //both tokens are set in cookie, inside an object, by doing that it is sligthly more encoded
+        //the second parameter is the cookie options, both tokens each has it own cookie options for easier modification
+        //both cookies will be httpOnly, and not accessible in other ways, also sameSite is strict, so only main domain has access 
         res.cookie('_accessToken', {token: accessToken}, accessCookieOptions);
         res.cookie('_refreshToken', {token: refreshToken}, refreshCookieOptions)
     
@@ -138,7 +135,7 @@ router.post('/Auth/signup', (req,res) => {
         // id, name and email properties
         res.status(201).send({user:{id: user._id, name: user.name, email: user.email}})
 
-        
+        //confirmation email will be sent after everything
         const data = {
             to: user.email,
             type: 'register_confirmation',
@@ -173,12 +170,12 @@ router.post('/Auth/login', async (req,res) => {
         let expire = null;
      
         //cookie settings
-        //since refresh can expire after 1 day defautl or 90 days if rememberMe is true
-        //additionaly function to ensure user is asked after 90 days, whether to still remember user can be defined
+        //since refresh can expire after 1 day by default or 90 days if rememberMe is true
+        //additionaly function to ensure user is asked after 90 days, whether to still remember user, can be defined
         //if rememberMe is true  
         if(req.body.rememberMe === true){
             
-            //this is cookie will, expire after 10years, 
+            //this cookie will, expire after 10years, 
             //refresh token can also have a long expiration, but is not the best solution
             //it will be better to occasionally ask user to login again to ensure it is the rigth user
             res.cookie('rememberMe',true, {maxAge:  86400000 * 400 * 10})
@@ -203,10 +200,13 @@ router.post('/Auth/login', async (req,res) => {
     .catch((e) => res.status(403).send({message: e.message})); 
 })
 
+//forgot password endpoint
 router.post('/Auth/forgot', (req,res)=>{
     
+    //this will first check if user exist, alot of errors will occure if user does not exists
     checkUser({email: req.body.email, password: null})
     .then((result) => { 
+        //as long as user exists, and password is null, no error will occure and the promise will return the user object
         mailService({
             to: result.email,
             name: result.name,
