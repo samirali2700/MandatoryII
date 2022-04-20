@@ -19,14 +19,4 @@
 </div>
 
 <style>
-  i {
-    width: 24px;
-    height: 24px;
-  }
-  nav {
-    padding: 15px 40px;
-  }
-  div {
-    padding: 10px 35px;
-  }
 </style>

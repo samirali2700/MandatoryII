@@ -6,7 +6,7 @@ dotenv.config();
 let transporter;
 
 //a main function,which will intialize a tranporter object 
-function main() {
+async function main() {
 
     
     transporter = nodemailer.createTransport({

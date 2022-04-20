@@ -5,6 +5,8 @@
   import Home from "./screens/privateScreens/Home.svelte";
   import Blog from "./screens/privateScreens/Shop.svelte";
   import PrivateRoute from "./PrivateRoute.svelte";
+  import Loader from "./components/Loader.svelte";
+  import Footer from "./components/Footer.svelte";
   import { user, userLoggedIn } from "./stores";
 
   export let _user;
@@ -20,8 +22,8 @@
 
 {#if _user !== null}
   <Router primary={false}>
-    <header class="w3-card">
-      <div class="nav w3-bottombar w3-padding-16">
+    <header class="w3-card" style="margin:0 50px;">
+      <div class="nav w3-bottombar w3-padding-16 ">
         {#if $userLoggedIn}
           <div class="links w3-bar-item w3-left ">
             <a href="/" class="link" use:link>Home</a>
@@ -59,7 +61,11 @@
 
       <Route component={Login} />
     </main>
+
+    <Footer />
   </Router>
+{:else}
+  <Loader />
 {/if}
 
 <style>
@@ -87,7 +93,7 @@
     height: 100%;
   }
   main {
-    padding: 25px;
+    height: 100%;
   }
 
   @media (min-width: 640px) {
