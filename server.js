@@ -33,7 +33,7 @@ app.use('/*', (req,res) => {
 })
 
 //connecting to mongodb, the URI is set inside .env, since it containse sensitive info.
-mongoose.connect(`${process.env.MONGODB_URI}`, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(db =>  {
     console.log(`Connected to DB`);
     //first when db is connect will the app.listen() be called, that is to ensure that access to db is available before access to frontend

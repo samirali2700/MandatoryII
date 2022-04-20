@@ -47,6 +47,34 @@
       })
       .catch((e) => console.log(e));
   }
+
+  function resetPass() {
+    fetch("/Auth/forgot", {
+      method: "post",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ email: email }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.success) {
+          toastr.success(result.success, "Success", {
+            timeOut: 2500,
+            positionClass: "toast-top-center",
+            closeButton: true,
+          });
+          document.getElementById("id01").style.display = "none";
+        } else {
+          toastr.error(result.fail, "Error", {
+            timeOut: 2500,
+            positionClass: "toast-top-center",
+            closeButton: true,
+          });
+        }
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+  }
 </script>
 
 {#if !$userLoggedIn}
@@ -99,17 +127,23 @@
                   onclick="document.getElementById('id01').style.display='none'"
                   class="w3-button w3-display-topright w3-red">&times;</span
                 >
+                <p>
+                  You will receive an email with instructions on how to reset
+                  your password
+                </p>
                 <input
                   style="width:100%; "
                   type="text"
                   bind:value={email}
                   class="w3-section"
                 />
-                <a
-                  href="/Auth/forgot?email='{email}'"
+                <p
+                  on:click={resetPass}
                   class="w3-button w3-blue"
-                  style="width:100%;">Reset password</a
+                  style="width:100%;"
                 >
+                  Reset password
+                </p>
               </div>
             </div>
           </div>

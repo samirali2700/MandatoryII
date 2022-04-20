@@ -6,9 +6,9 @@ body {
 }
 
 body {
-  /*color: #fff;
-  background-color: #000;*/
-  background-color: #eee;
+  color: #fff;
+  background-color: #000;
+  
   margin: 0;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,

@@ -58,15 +58,19 @@ export function checkUser(user){
             //if not rejected, meaning that user email exists
             //the password will be compare to the the hashed one in db with bcrypt.compare() method
             //the method will return a boolean value
+       
             if(result){
-                const passMatch = await bcrypt.compare(user.password, result.password);
+                if(user.password){
+                    const passMatch = await bcrypt.compare(user.password, result.password);
 
-                //
-                if(!passMatch){
-                    //if passMatch is false this means, 
-                    //that means that the input password and the hashed password doest NOT match
-                    reject({message:'Incorrect password'})
+                    if(!passMatch){
+                        //if passMatch is false this means, 
+                        //that means that the input password and the hashed password doest NOT match
+                        reject({message:'Incorrect password'})
+                    }
                 }
+                //
+                
                 //if not reject so far, that means that everything is in order, and the promise can be resolved
                 resolve({
                         id: result._id,

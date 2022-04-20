@@ -203,25 +203,20 @@ router.post('/Auth/login', async (req,res) => {
     .catch((e) => res.status(403).send({message: e.message})); 
 })
 
-router.get('/Auth/forgot', (req,res)=>{
-
-    console.log(req.query.email)
-
-    checkUser({email: req.query.email, password: null})
-.then((result) => { /*Will prop never reach her*/ })
-    .catch((err) => {
-        if(err.message === 'Incorrect password'){
-            console.log('User exists')
-        }
-        else if (err.message === 'Email not found'){
-            console.log('User does not exist')
-        }
-        else {
-            console.log('something different went wront')
-        }
-    })
+router.post('/Auth/forgot', (req,res)=>{
     
-   
+    checkUser({email: req.body.email, password: null})
+    .then((result) => { 
+        mailService({
+            to: result.email,
+            name: result.name,
+            type: 'forgot_password'
+        })
+        res.status(201).send({success: 'Email sent successfully'})
+     })
+    .catch((err) => {
+        res.status(403).send({fail: err.message})
+    })
 })
 
 
