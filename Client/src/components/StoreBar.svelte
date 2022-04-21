@@ -1,13 +1,29 @@
 <script>
   import Button from "./Button.svelte";
   import SearchBar from "./SearchBar.svelte";
+
+  let newClicked = true;
+  let popularClicked = false;
+  let collectionClicked = false;
+
+  function toggle() {
+    console.log("clicked");
+  }
 </script>
 
 <div class="store-bar">
   <div class="sorting">
-    <Button selected={true} name="New" />
-    <Button selected={false} name="Popular" />
-    <Button selected={false} name="Collections" />
+    <Button on:click={toggle} bind:selected={newClicked} name="New" />
+    <Button
+      on:click={() => !popularClicked}
+      bind:selected={popularClicked}
+      name="Popular"
+    />
+    <Button
+      on:click={toggle}
+      bind:selected={collectionClicked}
+      name="Collections"
+    />
   </div>
   <div id="search">
     <SearchBar />
@@ -20,7 +36,7 @@
     align-items: center;
     justify-content: space-between;
     padding-left: 50px;
-    padding-right: 158px;
+    padding-right: 140px;
   }
   .sorting {
     display: flex;

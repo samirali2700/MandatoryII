@@ -6,7 +6,9 @@
   }
 </script>
 
-<button class="w3-button w3-hover-blue" class:current={selected}>{name}</button>
+<button on:click class="w3-button w3-hover-blue" class:current={selected}
+  >{name}</button
+>
 
 <style>
   button:first-of-type {

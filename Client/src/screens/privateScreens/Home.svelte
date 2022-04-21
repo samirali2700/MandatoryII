@@ -21,7 +21,6 @@
   .intro {
     padding-top: 50px;
     margin-top: 100px;
-    margin-bottom: 50px;
     background: url("/images/intro.jpg") no-repeat center center; /*fixed*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -32,9 +31,9 @@
   .home-store {
     height: auto;
     padding: 50px 0;
-    display: block;
   }
   .intro-text {
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8);
     font-family: "Averia Serif Libre";
     font-style: normal;
     font-weight: 500;

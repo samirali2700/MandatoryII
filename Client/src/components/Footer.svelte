@@ -1,16 +1,19 @@
 <script>
 </script>
 
-<div class="w3-topbar">
-  <p>Svelte Shop</p>
-</div>
+<footer class="w3-topbar">
+  <div class="footer">
+    <p>Svelte Shop</p>
+  </div>
+</footer>
 
 <style>
-  div {
+  .footer {
+    max-width: 1450px;
     padding: 0 50px;
     display: flex;
     align-items: center;
-    margin-top: 25px;
+    margin: 0 auto;
     height: 100px;
   }
 </style>
