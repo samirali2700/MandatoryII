@@ -1,14 +1,20 @@
 <script>
-  import { user, rememberMe } from "../../stores";
   import { useLocation } from "svelte-navigator";
+  import StoreBar from "../../components/StoreBar.svelte";
+  import Store from "../../components/Store.svelte";
+
   let location = useLocation();
+  let books = [];
 </script>
 
 <div class="intro ">
   <h1 class="intro-text w3-animate-zoom">
     Learning is Living <span style="color:#fff">|</span> Living is Learning
   </h1>
-  <div class="main " />
+</div>
+<div class="home-store">
+  <StoreBar />
+  <Store />
 </div>
 
 <style>
@@ -16,7 +22,6 @@
     padding-top: 50px;
     margin-top: 100px;
     margin-bottom: 50px;
-    border-bottom: 1px solid red;
     background: url("/images/intro.jpg") no-repeat center center; /*fixed*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -24,8 +29,10 @@
     background-size: contain;
     height: 700px;
   }
-  .main {
-    height: 100%;
+  .home-store {
+    height: auto;
+    padding: 50px 0;
+    display: block;
   }
   .intro-text {
     font-family: "Averia Serif Libre";

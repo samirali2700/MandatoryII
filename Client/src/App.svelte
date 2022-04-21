@@ -93,9 +93,8 @@
     height: 100%;
   }
   main {
-    height: 100%;
-  }
-
-  @media (min-width: 640px) {
+    min-height: calc(100vh - 225px);
+    padding-bottom: 100px;
+    min-width: 450px;
   }
 </style>
