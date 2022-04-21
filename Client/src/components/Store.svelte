@@ -56,6 +56,12 @@
       src: "https://s3-alpha-sig.figma.com/img/87e7/c8f0/cb24d9759659777bd1448cab026d1c8a?Expires=1651449600&Signature=buqIvhN19ym770LJlhc6snvzuReOzds2nHRqXV2MDy8yxqq4CrlB6HyOvBI7qfxPUzBouoklakFPrOteG0KA9-43aBsvEc6ivjmL5nR6O7wt-B1VtuEUL-vW-pFKF0NfzFChBTpqMrP3cPxxMdlpevjfGV0FEobEgRebrvvF7RbgDzMtMn-2aRqk0YBFqYia2xwXCkqkYgoyEXcxC6xQGVzzfhkRVj~vA1rMFXpUwbvwn94D54FT8vB31KBZf3gExeeThhNNOf2l6CvR8fFCFE8SsS4lXy~V83VSwZiIgon7qezvcW2P31CHWHM2QknGNxM80sYq4oito1qvV6js2g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
       Author: "Septimius Severus",
     },
+    {
+      id: 90,
+      title: "Earrth 2100, What is left",
+      src: "https://s3-alpha-sig.figma.com/img/87e7/c8f0/cb24d9759659777bd1448cab026d1c8a?Expires=1651449600&Signature=buqIvhN19ym770LJlhc6snvzuReOzds2nHRqXV2MDy8yxqq4CrlB6HyOvBI7qfxPUzBouoklakFPrOteG0KA9-43aBsvEc6ivjmL5nR6O7wt-B1VtuEUL-vW-pFKF0NfzFChBTpqMrP3cPxxMdlpevjfGV0FEobEgRebrvvF7RbgDzMtMn-2aRqk0YBFqYia2xwXCkqkYgoyEXcxC6xQGVzzfhkRVj~vA1rMFXpUwbvwn94D54FT8vB31KBZf3gExeeThhNNOf2l6CvR8fFCFE8SsS4lXy~V83VSwZiIgon7qezvcW2P31CHWHM2QknGNxM80sYq4oito1qvV6js2g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+      Author: "Septimius Severus",
+    },
   ];
 </script>
 

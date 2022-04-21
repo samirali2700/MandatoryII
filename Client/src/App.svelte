@@ -1,5 +1,5 @@
 <script>
-  import { Router, link, Route, navigate } from "svelte-navigator";
+  import { Router, Route } from "svelte-navigator";
   import Login from "./screens/Login.svelte";
   import Register from "./screens/Register.svelte";
   import Home from "./screens/privateScreens/Home.svelte";
@@ -7,7 +7,7 @@
   import PrivateRoute from "./PrivateRoute.svelte";
   import Loader from "./components/Loader.svelte";
   import Footer from "./components/Footer.svelte";
-  import { user, userLoggedIn } from "./stores";
+  import { userLoggedIn } from "./stores";
 
   import NavBar from "./components/NavBar.svelte";
 
