@@ -20,9 +20,15 @@ app.use(express.urlencoded({ extended:false}));
 //setting svelte project as frontend
 app.use(express.static(path.resolve('./Client/public')));
 
+
 //Authentication routes
-import router  from './server/Authentication/AuthenticationRoutes.js';
+import router  from './Server/Authentication/AuthenticationRoutes.js';
 app.use(router);
+
+import bookRouter  from './Server/Books/booksRoutes.js';
+app.use(bookRouter);
+
+
 
 
 //redirecting everything to /, all routes are set in svelte anyway

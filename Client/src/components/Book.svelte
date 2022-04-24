@@ -3,7 +3,7 @@
 </script>
 
 <div class="book-cover w3-border">
-  <img src={book.src} alt="Book" />
+  <img src={book.coverImg} alt="Book" />
 </div>
 
 <style>

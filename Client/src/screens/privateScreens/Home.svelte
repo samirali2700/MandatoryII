@@ -4,7 +4,8 @@
   import Store from "../../components/Store.svelte";
 
   let location = useLocation();
-  let books = [];
+
+  let buttons = [{ name: "New" }, { name: "Popular" }, { name: "Collections" }];
 </script>
 
 <div class="intro ">
@@ -13,7 +14,7 @@
   </h1>
 </div>
 <div class="home-store">
-  <StoreBar />
+  <StoreBar {buttons} />
   <Store />
 </div>
 

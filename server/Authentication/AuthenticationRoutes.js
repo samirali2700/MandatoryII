@@ -47,7 +47,7 @@ function authenticate(req, res){
     //retreiving token if exists
     const accessToken = req.cookies._accessToken && req.cookies._accessToken.token;
     const refreshToken = req.cookies._refreshToken && req.cookies._refreshToken.token;
-
+  
     
     if(accessToken !== undefined){
 
@@ -217,6 +217,27 @@ router.post('/Auth/forgot', (req,res)=>{
     .catch((err) => {
         res.status(403).send({fail: err.message})
     })
+})
+
+
+router.post('/Auth/admin', (req,res) => {
+    
+   const admin = req.body;
+
+
+    if(admin.email === 'admin@svelteshop.dk'){
+        if(admin.password === 'admin'){
+            const accessToken = generateAccessToken({name: 'Admin', email: 'Admin@svelteshop.dk'});
+            const refreshToken = generateRefreshToken({name: 'Admin', email: 'Admin@svelteshop.dk'}, null);
+    
+            res.cookie('_accessToken', {token:accessToken}, accessCookieOptions);
+            res.cookie('_refreshToken', {token:refreshToken}, refreshCookieOptions);
+    
+            res.status(201).send({admin: {name: 'Admin', email: 'Admin@svelteshop.dk'}})
+        }
+        else res.send({message: 'admin password wrong'})
+    }
+    else res.send({message: 'admin email wrong'})
 })
 
 

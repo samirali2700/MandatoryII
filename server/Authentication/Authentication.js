@@ -120,15 +120,21 @@ export const verifyToken = (token, secret) => {
 
             //to ensure that the user which tokens belongs to exist
             //findById() method will be called 
-            User.findById(user.id)
-            .then((data) => {
-                resolve({
-                    id: data._id,
-                    name: data.name,
-                    email: data.email
-                });
-            })
-            .catch((e) => reject(e))
+            
+            if(user.name === 'Admin'){
+                resolve({name: user.name, email: user.name});
+            }
+            else User.findById(user.id)
+                .then((data) => {
+                    resolve({
+                        id: data._id,
+                        name: data.name,
+                        email: data.email
+                    });
+                })
+                .catch((e) => reject(e))
+               
+            
         })
     })
 }

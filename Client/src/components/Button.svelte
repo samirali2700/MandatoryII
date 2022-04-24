@@ -1,20 +1,22 @@
 <script>
-  export let name;
+  export let button;
   export let selected;
-
-  if (selected) {
-  }
+  export let borderLess;
 </script>
 
-<button on:click class="w3-button w3-hover-blue" class:current={selected}
-  >{name}</button
+<button
+  on:click
+  class="w3-button w3-hover-blue"
+  class:current={selected === button.name}
+  class:borderless={borderLess}>{button.name}</button
 >
 
 <style>
   button:first-of-type {
     border-right: none;
   }
-  button:last-of-type {
+
+  .borderless {
     border-left: none;
   }
   .current {

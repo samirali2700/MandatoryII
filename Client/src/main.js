@@ -1,5 +1,5 @@
 import App from './App.svelte';
-import { user, rememberMe } from './stores'
+import { user, rememberMe, admin } from './stores'
 
 
 
@@ -22,10 +22,17 @@ function getCookie(name) {
 	const res = await fetch('/Auth');
 	const data = await res.json();
 		if(data.data){
+
+			if(data.data.name === 'Admin'){
+				admin.set(data.data)
+			}
+			else{
+				user.set(data.data);
+			}
+
 			app.$set({
 				_user: data.data
 			})
-			user.set(data.data);
 		}
 		else{
 			app.$set({

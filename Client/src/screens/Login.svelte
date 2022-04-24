@@ -119,7 +119,7 @@
 
           <div id="id01" class="w3-modal ">
             <div
-              class="w3-modal-content  w3-animate-zoom w3-card-4"
+              class="w3-modal-content  w3-animate-zoom w3-card-4 w3-round-xlarge"
               style="padding:25px 10px; max-width:650px;"
             >
               <div class="w3-container w3-padding-16 w3-center w3-section">
@@ -139,7 +139,7 @@
                 />
                 <p
                   on:click={resetPass}
-                  class="w3-button w3-blue"
+                  class="w3-button w3-blue w3-round-xlarge"
                   style="width:100%;"
                 >
                   Reset password
@@ -155,8 +155,6 @@
 {/if}
 
 <style>
-  #id01 {
-  }
   .remember-me-container {
     display: flex;
     align-items: center;
